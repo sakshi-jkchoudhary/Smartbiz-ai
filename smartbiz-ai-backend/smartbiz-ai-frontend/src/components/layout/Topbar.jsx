@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
-import { LogOut, ChevronDown } from 'lucide-react';
+import { LogOut, ChevronDown ,Menu} from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 
-export default function Topbar({ title, subtitle }) {
+export default function Topbar({ title, subtitle, onMenuClick }) {
   const { user, logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
@@ -27,11 +27,20 @@ export default function Topbar({ title, subtitle }) {
     : 'U';
 
   return (
-    <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-sm border-b border-slate-100 px-8 py-4 flex items-center justify-between">
-      <div>
-        <h1 className="text-lg font-semibold text-slate-900">{title}</h1>
-        {subtitle && <p className="text-sm text-slate-500 mt-0.5">{subtitle}</p>}
-      </div>
+    <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-sm border-b border-slate-100 px-4 md:px-8 py-4 flex items-center gap-4 justify-between">
+     <div className="flex items-center gap-3">
+    <button 
+      onClick={onMenuClick}
+      className="block md:hidden p-1 rounded-lg hover:bg-slate-100 transition-colors"
+    >
+      <Menu className="w-6 h-6 text-slate-600" />
+    </button>
+    
+    <div>
+      <h1 className="text-lg font-semibold text-slate-900">{title}</h1>
+      {subtitle && <p className="text-sm text-slate-500 mt-0.5">{subtitle}</p>}
+    </div>
+  </div>
 
       <div className="relative" ref={menuRef}>
         <button
