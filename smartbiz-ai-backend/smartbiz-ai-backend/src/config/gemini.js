@@ -4,9 +4,10 @@ if (!process.env.GEMINI_API_KEY) {
     console.warn('Warning: GEMINI_API_KEY is not set. AI features will not work.');
 }
 
-// Yahan humne explicitly apiVersion: 'v1' set kiya hai taaki v1beta ka 404 error na aaye
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '', { apiVersion: 'v1' });
+// Ekdum simple initialization bina kisi extra option ke
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
-const geminiModel = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+// Yahan model ke naam ke aage 'v1/' lagakar system ko direct sahi endpoint par bhejte hain
+const geminiModel = genAI.getGenerativeModel({ model: 'models/gemini-1.5-flash' });
 
 module.exports = geminiModel;
