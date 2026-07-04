@@ -17,16 +17,14 @@ export default function DashboardLayout({ title, subtitle, children }) {
           onClick={handleMenuClick}
         />
       )}
-     <div 
-  className="fixed inset-y-0 left-0 z-50 bg-white transition-all duration-200 ease-in-out md:relative md:translate-x-0"
-  style={{ 
-    width: '240px',
-    left: isSidebarOpen ? '0px' : '-240px',
-    position: window.innerWidth < 768 ? 'fixed' : 'relative'
-  }}
->
-  <Sidebar />
-</div>
+     {/* Sidebar Wrapper */}
+      <div className={`
+        fixed inset-y-0 left-0 z-50 w-64 bg-white transition-all duration-300 ease-in-out
+        md:sticky md:top-0 md:h-screen md:translate-x-0
+        ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+        <Sidebar />
+      </div>
       <div className="flex-1 min-w-0 flex flex-col">
         <Topbar title={title} subtitle={subtitle} onMenuClick={handleMenuClick}/>
         <main className="flex-1 px-8 py-6">{children}</main>
