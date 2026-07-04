@@ -27,7 +27,8 @@ export default function Sidebar() {
   const { business } = useAuth();
 
   return (
-    <aside className="w-60 h-screen sticky top-0 bg-white border-r border-slate-100 flex flex-col py-5 px-3">
+    <aside className="h-screen sticky top-0 bg-white border-r border-slate-100 flex-col py-5 px-3" 
+      style={{ display: window.innerWidth < 768 ? 'none' : 'flex' }}>
       <div className="flex items-center gap-2.5 px-3 pb-6">
         <div className="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center flex-shrink-0">
           <Zap className="w-4 h-4 text-white" fill="white" />
