@@ -102,9 +102,8 @@ export default function OrderFormModal({ isOpen, onClose, onSuccess }) {
       await orderApi.create({
         customerId: customerId || null,
         items: cart.map((item) => ({ productId: item.productId, quantity: item.quantity })),
-        discount: Number(discount) || 0,
+        discount: paymentMode === 'pending' ? -1 : Number(discount) || 0,
         paymentMode: paymentMode === 'pending' ? 'cash' : paymentMode,
-        paymentStatus: paymentMode === 'pending' ? 'Pending' : 'Paid',
       });
       toast.success('Order created');
       onSuccess();
