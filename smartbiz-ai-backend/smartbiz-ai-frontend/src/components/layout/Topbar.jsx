@@ -35,18 +35,22 @@ export default function Topbar({ title, subtitle, onMenuClick }) {
     >
       <Menu className="w-6 h-6 text-slate-600" />
     </button>
-    
+    <div className="min-w-0">
+      <h1 className="text-base md:text-lg font-semibold text-slate-900 truncate">{title}</h1>
+      {subtitle && <p className="text-sm text-slate-500 truncate">{subtitle}</p>}
+    </div>
     <div>
       <h1 className="text-lg font-semibold text-slate-900">{title}</h1>
-      {subtitle && <p className="text-sm text-slate-500 mt-0.5">{subtitle}</p>}
+      {subtitle && <p className="hidden sm:block text-sm text-slate-500 mt-0.5 truncate">{subtitle}</p>}
     </div>
-  </div>
-{/* Notification Bell Button */}
-<button className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 relative rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors mr-2">
-  <Bell className="w-5 h-5" />
-  {/* Chota red dot active notification ke liye */}
-  <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
-</button>
+    </div>
+    {/* Notification Bell Container aligned right */}
+<div className="flex items-center ml-auto">
+  <button className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 relative rounded-full hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors mr-3">
+    <Bell className="w-5 h-5" />
+    <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
+  </button>
+</div>
       <div className="relative" ref={menuRef}>
         <button
           onClick={() => setMenuOpen((v) => !v)}
