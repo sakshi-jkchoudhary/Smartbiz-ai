@@ -64,45 +64,38 @@ export default function ProductsPage() {
 
   return (
     <DashboardLayout title="Products" subtitle="Manage your product catalog and pricing">
-      <Card>
-        <div className="flex items-center justify-between mb-5 gap-3">
-          <div className="relative w-72">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="input-field pl-9"
-            />
+      {/* Sahi spacing wrapper jo content ko sidebar se alag rakhega */}
+      <div className="w-full max-w-6xl mx-auto space-y-6">
+        
+        <Card>
+          <div className="flex items-center justify-between mb-5 gap-3">
+            <div className="relative w-72">
+              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="input-field pl-9"
+              />
+            </div>
+            <Button icon={Plus} onClick={handleAdd}>
+              Add product
+            </Button>
           </div>
-          <Button icon={Plus} onClick={handleAdd}>
-            Add product
-          </Button>
-        </div>
 
-        {loading ? (
-          <Loader label="Loading products..." />
-        ) : (
-          <ProductTable products={products} onEdit={handleEdit} onDelete={setDeleteTarget} />
-        )}
-      </Card>
+          {loading ? (
+            <Loader label="Loading products..." />
+          ) : (
+            <ProductTable 
+              products={products} 
+              onEdit={handleEdit} 
+              onDelete={setDeleteTarget} 
+            />
+          )}
+        </Card>
 
-      <ProductFormModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        onSuccess={loadProducts}
-        product={editingProduct}
-      />
-
-      <ConfirmDialog
-        isOpen={!!deleteTarget}
-        onClose={() => setDeleteTarget(null)}
-        onConfirm={handleDeleteConfirm}
-        title="Delete product"
-        message={`Are you sure you want to delete "${deleteTarget?.name}"? This can't be undone.`}
-        loading={deleting}
-      />
+      </div>
     </DashboardLayout>
   );
 }
