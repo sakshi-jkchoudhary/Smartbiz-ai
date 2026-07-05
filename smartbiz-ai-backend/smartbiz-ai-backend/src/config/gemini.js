@@ -1,34 +1,36 @@
-const axios = require('axios');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 if (!process.env.GEMINI_API_KEY) {
-    console.warn('Warning: GEMINI_API_KEY is not set. AI features will not work.');
+    console.warn('Warning: GEMINI_API_KEY is not set.');
 }
 
-// Hum ek helper object bana rahe hain jo purane geminiModel ki tarah hi kaam karega
+// v1 API version ko force karne ke liye apiVersion pass karenge
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+
 const geminiModel = {
     generateContent: async (prompt) => {
-        const apiKey = process.env.GEMINI_API_KEY;
-        // Yahan humne explicitly stable 'v1' endpoint ko hit kiya hai
-        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-        
         try {
-            const contents = typeof prompt === 'string' 
-                ? [{ parts: [{ text: prompt }] }] 
-                : prompt.contents;
-
-            const response = await axios.post(url, { contents }, {
-                headers: { 'Content-Type': 'application/json' }
-            });
+            // Nayi key format ke liye apiVersion: 'v1' dena zaroori hai
+            const model = genAI.getGenerativeModel(
+                { model: "gemini-1.5-flash" },
+                { apiVersion: 'v1' }
+            );
             
-            // Controller ke liye dummy response object structure taaki baki backend code na tute
+            const promptText = typeof prompt === 'string' 
+                ? prompt 
+                : prompt.contents?.[0]?.parts?.[0]?.text || JSON.stringify(prompt);
+
+            const result = await model.generateContent(promptText);
+            const response = await result.response;
+            
             return {
                 response: {
-                    text: () => response.data.candidates[0].content.parts[0].text
+                    text: () => response.text()
                 }
             };
         } catch (error) {
-            console.error('Direct Gemini API Error:', error.response?.data || error.message);
-            throw new Error(error.response?.data?.error?.message || 'Failed to generate content');
+            console.error('Gemini SDK Error:', error.message);
+            throw error;
         }
     }
 };
