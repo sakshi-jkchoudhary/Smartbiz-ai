@@ -43,7 +43,7 @@ export default function Sidebar() {
   }, [darkMode]);
 
   return (
-    <aside className="w-60 h-[100dvh] fixed top-0 left-0 bg-white dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800 flex flex-col justify-between py-4 transition-colors duration-200">
+    <aside className="w-60 bg-white dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800 flex flex-col justify-between py-4 transition-colors duration-200">
       <div className="flex items-center gap-2.5 px-3 pb-6">
         <div className="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center flex-shrink-0">
           <Zap className="w-4 h-4 text-white" fill="white" />
