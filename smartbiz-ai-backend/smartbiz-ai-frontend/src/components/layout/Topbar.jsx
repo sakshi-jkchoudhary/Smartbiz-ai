@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { LogOut, ChevronDown ,Menu} from 'lucide-react';
+import { LogOut, ChevronDown ,Menu, Bell} from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 
 export default function Topbar({ title, subtitle, onMenuClick }) {
@@ -41,7 +41,12 @@ export default function Topbar({ title, subtitle, onMenuClick }) {
       {subtitle && <p className="text-sm text-slate-500 mt-0.5">{subtitle}</p>}
     </div>
   </div>
-
+{/* Notification Bell Button */}
+<button className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 relative rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors mr-2">
+  <Bell className="w-5 h-5" />
+  {/* Chota red dot active notification ke liye */}
+  <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
+</button>
       <div className="relative" ref={menuRef}>
         <button
           onClick={() => setMenuOpen((v) => !v)}

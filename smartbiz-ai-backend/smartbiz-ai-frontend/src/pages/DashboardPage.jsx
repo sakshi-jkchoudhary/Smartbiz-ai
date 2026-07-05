@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IndianRupee, ShoppingCart, AlertTriangle, TrendingUp } from 'lucide-react';
+import { IndianRupee, ShoppingCart, AlertTriangle, TrendingUp, Hourglass } from 'lucide-react';
 import DashboardLayout from '../components/layout/DashboardLayout';
 import StatCard from '../components/dashboard/StatCard';
 import RevenueChart from '../components/dashboard/RevenueChart';
@@ -70,7 +70,7 @@ export default function DashboardPage() {
       title={`Good day, ${firstName}`}
       subtitle={`${business?.name || 'Your business'} · ${today}`}
     >
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
         <StatCard
           label="Today's revenue"
           value={formatCurrency(summary?.today?.revenue)}
@@ -91,6 +91,11 @@ export default function DashboardPage() {
           label="Avg order value"
           value={formatCurrency(summary?.avgOrderValue)}
           icon={TrendingUp}
+        />
+        <StatCard
+          label="Pending orders"
+          value={formatCurrency(summary?.totalPendingRevenue ?? 0)}
+          icon={Hourglass}
         />
       </div>
 
