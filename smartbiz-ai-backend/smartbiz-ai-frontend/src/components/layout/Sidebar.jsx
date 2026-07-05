@@ -48,7 +48,7 @@ const [darkMode, setDarkMode] = useState(() => {
           <Zap className="w-4 h-4 text-white" fill="white" />
         </div>
         <div className="min-w-0">
-          <p className="text-sm font-semibold text-slate-900 leading-tight">SmartBiz AI</p>
+          <p className="text-sm font-semibold text-slate-900 dark:text-white leading-tight">SmartBiz AI</p>
           <p className="text-xs text-slate-400 truncate">{business?.name || 'Your business'}</p>
         </div>
       </div>
