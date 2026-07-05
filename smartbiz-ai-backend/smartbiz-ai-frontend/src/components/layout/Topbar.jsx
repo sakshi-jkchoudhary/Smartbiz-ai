@@ -37,7 +37,7 @@ export default function Topbar({ title, subtitle, onMenuClick }) {
     </button>
     <div className="min-w-0">
       <h1 className="text-base md:text-lg font-semibold text-slate-900 truncate">{title}</h1>
-      {subtitle && <p className="text-sm text-slate-500 truncate">{subtitle}</p>}
+      {subtitle && <p className="hidden sm:block text-xs md:text-sm text-slate-500 mt-0.5 truncate">{subtitle}</p>}
     </div>
   </div>
     {/* Notification Bell Container aligned right */}
