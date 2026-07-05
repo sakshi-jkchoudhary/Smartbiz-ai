@@ -35,14 +35,15 @@ export default function SettingsPage() {
 
   return (
     <DashboardLayout>
-      <div className="max-w-4xl mx-auto p-4 md:p-6 space-y-6">
-        <h1 className="text-2xl font-bold text-slate-900">Settings</h1>
+      <div className="flex-1 w-full max-w-5xl mx-auto px-6 py-8 space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold text-slate-900">Business Profile</h1>
         <p className="text-sm text-slate-500 mt-1">
-          Manage your business profile and preferences          
+          Your business details, invoice settings, team, and backups.
         </p>
-        
       </div>
 
+      {/* Iske niche tumhara baaki Tabs aur Forms wala saara code aayega */}
       {/* Tabs Layout */}
       <div className="flex border-b border-slate-200 mb-6">
         {[
@@ -187,6 +188,7 @@ export default function SettingsPage() {
           Database backup options coming soon.
         </div>
       )}
+      </div>
     </DashboardLayout>
   );
 }
