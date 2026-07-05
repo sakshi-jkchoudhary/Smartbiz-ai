@@ -22,7 +22,7 @@ export default function DashboardLayout({ title, subtitle, children }) {
       )}
 
       {/* Ekdam simple flex container bina kisi fixed position ke */}
-      <div className="flex flex-col md:flex-row min-h-screen w-full">
+      <div className="flex flex-col md:flex-row min-overflow-hidden w-full">
         
         {/* Left Sidebar Layout Box */}
         <div className={`
