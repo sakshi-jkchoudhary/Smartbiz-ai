@@ -14,7 +14,7 @@ import AnalyticsPage from '../pages/AnalyticsPage';
 import AIAssistantPage from '../pages/AIAssistantPage';
 import SettingsPage from '../pages/SettingsPage';
 import NotFoundPage from '../pages/NotFoundPage';
-import SettingsPage from '../pages/SettingsPage';
+
 
 export default function AppRoutes() {
   return (
@@ -22,8 +22,7 @@ export default function AppRoutes() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
-      <Route path="/settings" element={<SettingsPage />} />
-      <Route
+      <Route path="/settings" element={<SettingsPage />} 
         path="/dashboard"
         element={
           <ProtectedRoute>
