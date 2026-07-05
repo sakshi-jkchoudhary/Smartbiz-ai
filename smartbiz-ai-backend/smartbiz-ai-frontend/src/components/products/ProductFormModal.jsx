@@ -4,6 +4,7 @@ import Modal from '../common/Modal';
 import { Input, Select } from '../common/Input';
 import Button from '../common/Button';
 import { productApi } from '../../api/productApi';
+import {Html5QrcodeScanner} from "html5-qrcode";
 
 const UNITS = ['pcs', 'kg', 'g', 'litre', 'ml', 'bag', 'box', 'pack'];
 
@@ -23,6 +24,7 @@ export default function ProductFormModal({ isOpen, onClose, onSuccess, product }
   const [form, setForm] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [showScanner, setShowScanner] = useState(false);
   const isEdit = !!product;
 
   useEffect(() => {
@@ -43,6 +45,10 @@ export default function ProductFormModal({ isOpen, onClose, onSuccess, product }
     }
     setErrors({});
   }, [product, isOpen]);
+  useEffect(() => {
+    if (!showScanner) return;
+    console.log("Scanner started");
+    }, [showScanner]); 
 
   const handleChange = (e) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -178,10 +184,16 @@ export default function ProductFormModal({ isOpen, onClose, onSuccess, product }
           <button
             type="button"
             variant="secondary"
-            onClick={() => alert("Scanner coming soon!")}>
+            onClick={() => setShowScanner(true)}>
              Scan Barcode
           </button>
         </div>
+        {showScanner && (
+          <div 
+          id="barcode-reader"
+          className="booder rounded-lg p-3 mt-3"
+       > </div>
+        )}
         <div className="flex justify-end gap-3 pt-2">
           <Button type="button" variant="secondary" onClick={onClose}>
             Cancel
