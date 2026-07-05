@@ -80,6 +80,13 @@ export default function OrdersPage() {
             <div className="flex items-center justify-between">
               <p className="text-sm text-slate-500">{viewingOrder.customerNameSnapshot}</p>
               <OrderStatusBadge status={viewingOrder.status} />
+              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider ${
+  viewingOrder.paymentStatus === 'Pending' 
+    ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400 border border-amber-200 dark:border-amber-800' 
+    : 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800'
+}`}>
+  {viewingOrder.paymentStatus || 'Paid'}
+</span>
             </div>
             <div className="border border-slate-100 rounded-xl divide-y divide-slate-50">
               {viewingOrder.items.map((item, i) => (
