@@ -104,6 +104,7 @@ export default function OrderFormModal({ isOpen, onClose, onSuccess }) {
         items: cart.map((item) => ({ productId: item.productId, quantity: item.quantity })),
         discount: Number(discount) || 0,
         paymentMode,
+        paymentStatus: paymentMode === 'pending' ? 'Pending' : 'Paid',
       });
       toast.success('Order created');
       onSuccess();
@@ -133,6 +134,7 @@ export default function OrderFormModal({ isOpen, onClose, onSuccess }) {
                 {m.toUpperCase()}
               </option>
             ))}
+            <option value="pending">Credit / PENDING</option>
           </Select>
         </div>
 
