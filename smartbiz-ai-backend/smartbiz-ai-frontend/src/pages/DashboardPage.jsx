@@ -98,10 +98,12 @@ export default function DashboardPage() {
           icon={TrendingUp}
         />
         <StatCard
-          label="Pending orders"
-          value={formatCurrency(summary?.totalPendingRevenue ?? 0)}
-          icon={Hourglass}
-        />
+  label="Pending orders"
+  value={formatCurrency(
+    recentOrders?.filter(o => o.discount === 0.99).reduce((sum, o) => sum + (o.finalAmount || 0), 0) ?? 0
+  )}
+  icon={Hourglass}
+/>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
