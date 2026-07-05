@@ -100,11 +100,12 @@ export default function OrderFormModal({ isOpen, onClose, onSuccess }) {
     setLoading(true);
     try {
       await orderApi.create({
-        customerId: customerId || null,
-        items: cart.map((item) => ({ productId: item.productId, quantity: item.quantity })),
-        discount: Number(discount) || 0,
-        paymentMode: paymentMode === 'pending' ? 'pending_payment' : paymentMode,
-      });
+  customerId: customerId || null,
+  items: cart.map((item) => ({ productId: item.productId, quantity: item.quantity })),
+  // Agar dropdown pending hai toh valid decimal discount flag 0.99 bhej do
+  discount: paymentMode === 'pending' ? 0.99 : (Number(discount) || 0),
+  paymentMode: 'cash', 
+});
       toast.success('Order created');
       onSuccess();
       onClose();
