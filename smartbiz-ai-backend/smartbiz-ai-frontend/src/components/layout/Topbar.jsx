@@ -39,11 +39,7 @@ export default function Topbar({ title, subtitle, onMenuClick }) {
       <h1 className="text-base md:text-lg font-semibold text-slate-900 truncate">{title}</h1>
       {subtitle && <p className="text-sm text-slate-500 truncate">{subtitle}</p>}
     </div>
-    <div>
-      <h1 className="text-lg font-semibold text-slate-900">{title}</h1>
-      {subtitle && <p className="hidden sm:block text-sm text-slate-500 mt-0.5 truncate">{subtitle}</p>}
-    </div>
-    </div>
+  </div>
     {/* Notification Bell Container aligned right */}
 <div className="flex items-center ml-auto">
   <button className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 relative rounded-full hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors mr-3">
