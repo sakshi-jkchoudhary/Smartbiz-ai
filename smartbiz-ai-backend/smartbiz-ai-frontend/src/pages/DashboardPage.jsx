@@ -69,12 +69,13 @@ export default function DashboardPage() {
     <DashboardLayout
       // title={`Good day, ${firstName}`}
       // subtitle={`${business?.name || 'Your business'} · ${today}`}
-    >
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-       <div className="mb-6 px-4 md:px-8 max-w-[1600px] mx-auto w-full">
+     > <div className="mb-6">
   <h2 className="text-2xl font-bold text-slate-900">Welcome back, {firstName}</h2>
   <p className="text-sm text-slate-500 mt-1">Here's how your business is doing today.</p>
 </div>
+    
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+       
         <StatCard
           label="Today's revenue"
           value={formatCurrency(summary?.today?.revenue)}
