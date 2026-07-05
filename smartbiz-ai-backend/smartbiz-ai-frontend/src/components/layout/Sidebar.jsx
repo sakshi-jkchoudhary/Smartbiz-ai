@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import {
   LayoutDashboard,
   Package,
@@ -8,6 +9,8 @@ import {
   FileText,
   BarChart3,
   Sparkles,
+  Sun,
+  Moon,
   Settings,
   Zap,
 } from 'lucide-react';
@@ -25,7 +28,19 @@ const NAV_ITEMS = [
 
 export default function Sidebar() {
   const { business } = useAuth();
+const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('theme') === 'dark';
+  });
 
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [darkMode]);
   return (
     <aside className="w-60 h-[100dvh] fixed top-0 left-0 bg-white border-r border-slate-100 flex flex-col justify-between  py-5 px-3 z-50 overflow-y-auto" >
       <div className="flex items-center gap-2.5 px-3 pb-6">
@@ -68,6 +83,22 @@ export default function Sidebar() {
             }`
           }
         >
+          <button 
+  onClick={() => setDarkMode(!darkMode)}
+  className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors text-slate-600 hover:bg-slate-50"
+>
+  {darkMode ? (
+    <>
+      <Sun className="w-4 h-4 text-yellow-500" />
+      <span>Light Mode</span>
+    </>
+  ) : (
+    <>
+      <Moon className="w-4 h-4 text-slate-500" />
+      <span>Dark Mode</span>
+    </>
+  )}
+</button>
           <Sparkles className="w-4 h-4 flex-shrink-0" />
           AI assistant
         </NavLink>
