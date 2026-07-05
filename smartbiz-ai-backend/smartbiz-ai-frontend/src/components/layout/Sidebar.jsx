@@ -83,22 +83,7 @@ const [darkMode, setDarkMode] = useState(() => {
             }`
           }
         >
-          <button 
-  onClick={() => setDarkMode(!darkMode)}
-  className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors text-slate-600 hover:bg-slate-50"
->
-  {darkMode ? (
-    <>
-      <Sun className="w-4 h-4 text-yellow-500" />
-      <span>Light Mode</span>
-    </>
-  ) : (
-    <>
-      <Moon className="w-4 h-4 text-slate-500" />
-      <span>Dark Mode</span>
-    </>
-  )}
-</button>
+         
           <Sparkles className="w-4 h-4 flex-shrink-0" />
           AI assistant
         </NavLink>
@@ -115,6 +100,22 @@ const [darkMode, setDarkMode] = useState(() => {
           <Settings className="w-4 h-4 flex-shrink-0" />
           Settings
         </NavLink>
+         <button 
+  onClick={() => setDarkMode(!darkMode)}
+  className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors text-slate-600 hover:bg-slate-50"
+>
+  {darkMode ? (
+    <>
+      <Sun className="w-4 h-4 text-yellow-500" />
+      <span>Light Mode</span>
+    </>
+  ) : (
+    <>
+      <Moon className="w-4 h-4 text-slate-500" />
+      <span>Dark Mode</span>
+    </>
+  )}
+</button>
       </div>
     </aside>
   );
