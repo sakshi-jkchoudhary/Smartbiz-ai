@@ -22,6 +22,12 @@ const productSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    barcode: {
+      type: String,
+      trim: true,
+      unique: true,
+      sparse: true,
+    },
     price: {
       type: Number,
       required: [true, 'Selling price is required'],

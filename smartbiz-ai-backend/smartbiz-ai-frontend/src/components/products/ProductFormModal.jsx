@@ -11,6 +11,7 @@ const EMPTY_FORM = {
   name: '',
   category: '',
   sku: '',
+  barcode: '',
   price: '',
   costPrice: '',
   stockQty: '',
@@ -30,6 +31,7 @@ export default function ProductFormModal({ isOpen, onClose, onSuccess, product }
         name: product.name || '',
         category: product.category || '',
         sku: product.sku || '',
+        barcode: product.barcode || '',
         price: product.price ?? '',
         costPrice: product.costPrice ?? '',
         stockQty: product.stockQty ?? '',
@@ -111,6 +113,14 @@ export default function ProductFormModal({ isOpen, onClose, onSuccess, product }
             value={form.sku}
             onChange={handleChange}
           />
+        
+        <Input
+          label="Barcode "
+          name="barcode"
+          placeholder="8901234567890"
+          value={form.barcode}
+          onChange={handleChange}
+        />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <Input

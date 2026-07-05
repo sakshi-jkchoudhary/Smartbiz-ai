@@ -30,7 +30,7 @@ const getProduct = asyncHandler(async (req, res) => {
 });
 
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, category, sku, price, costPrice, stockQty, unit, reorderThreshold } = req.body;
+  const { name, category, sku, barcode, price, costPrice, stockQty, unit, reorderThreshold } = req.body;
 
   if (!name || price === undefined || stockQty === undefined) {
     return error(res, 'Name, price, and stock quantity are required', 400);
@@ -41,6 +41,7 @@ const createProduct = asyncHandler(async (req, res) => {
     name,
     category,
     sku,
+    barcode,
     price,
     costPrice,
     stockQty,
@@ -59,6 +60,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     'name',
     'category',
     'sku',
+    'barcode',
     'price',
     'costPrice',
     'stockQty',
