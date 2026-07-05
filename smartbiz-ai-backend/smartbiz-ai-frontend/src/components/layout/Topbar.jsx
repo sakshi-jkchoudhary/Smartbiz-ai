@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { LogOut, ChevronDown, Menu, Bell, AlertCircle, CheckCircle2 } from 'lucide-react';
-import { useAuth } from '../../../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function Topbar({ title, subtitle, onMenuClick }) {
   const { user, logout } = useAuth();
