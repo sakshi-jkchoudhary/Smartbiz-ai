@@ -1,35 +1,47 @@
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-
 if (!process.env.GEMINI_API_KEY) {
-    console.warn('Warning: GEMINI_API_KEY is not set.');
+    console.warn('Warning: GEMINI_API_KEY is not set. AI features will not work.');
 }
-
-// v1 API version ko force karne ke liye apiVersion pass karenge
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
 const geminiModel = {
     generateContent: async (prompt) => {
         try {
-            // Nayi key format ke liye apiVersion: 'v1' dena zaroori hai
-            const model = genAI.getGenerativeModel(
-                { model: "gemini-1.5-flash" },
-                { apiVersion: 'v1' }
-            );
+            const apiKey = process.env.GEMINI_API_KEY || '';
             
+            // Extract text prompt securely
             const promptText = typeof prompt === 'string' 
                 ? prompt 
                 : prompt.contents?.[0]?.parts?.[0]?.text || JSON.stringify(prompt);
 
-            const result = await model.generateContent(promptText);
-            const response = await result.response;
-            
+            // Direct HTTPS injection to enforce global v1 stable endpoint bypass
+            const response = await fetch(
+                `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{ text: promptText }]
+                        }]
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error?.message || `HTTP Error ${response.status}`);
+            }
+
+            // Map structural interface exactly to your original controller setup
             return {
                 response: {
-                    text: () => response.text()
+                    text: () => data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response text available.'
                 }
             };
         } catch (error) {
-            console.error('Gemini SDK Error:', error.message);
+            console.error('Direct Gemini Fetch Error:', error.message);
             throw error;
         }
     }
