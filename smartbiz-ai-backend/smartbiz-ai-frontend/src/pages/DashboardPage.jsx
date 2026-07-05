@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IndianRupee, ShoppingCart, AlertTriangle, TrendingUp, Hourglass } from 'lucide-react';
 import DashboardLayout from '../components/layout/DashboardLayout';
 import StatCard from '../components/dashboard/StatCard';
@@ -50,7 +50,7 @@ export default function DashboardPage() {
     loadDashboard();
   }, []);
 
-  const firstName = user?.name?.split(' ')[0] || 'there';
+  const firstName = user?.name ? user.name.split(' ')[0] : 'there';
   const today = new Date().toLocaleDateString('en-IN', {
     weekday: 'long',
     day: 'numeric',
@@ -66,60 +66,75 @@ export default function DashboardPage() {
   }
 
   return (
-    <DashboardLayout
-      // title={`Good day, ${firstName}`}
-      // subtitle={`${business?.name || 'Your business'} · ${today}`}
-     > <div className="mb-6">
-  <h2 className="text-2xl font-bold text-slate-900">Welcome back, {firstName}</h2>
-  <p className="text-sm text-slate-500 mt-1">Here's how your business is doing today.</p>
-</div>
-    
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-       
-        <StatCard
-          label="Today's revenue"
-          value={formatCurrency(summary?.today?.revenue)}
-          icon={IndianRupee}
-          accent
-        />
-        <StatCard
-          label="Orders today"
-          value={summary?.today?.orders ?? 0}
-          icon={ShoppingCart}
-        />
-        <StatCard
-          label="Low stock items"
-          value={lowStock.length}
-          icon={AlertTriangle}
-        />
-        <StatCard
-          label="Avg order value"
-          value={formatCurrency(summary?.avgOrderValue)}
-          icon={TrendingUp}
-        />
-        <StatCard
-  label="Pending orders"
-  value={formatCurrency(
-    recentOrders?.filter(o => o.discount === 0.99).reduce((sum, o) => sum + (o.finalAmount || 0), 0) ?? 0
-  )}
-  icon={Hourglass}
-/>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
-        <Card className="lg:col-span-2">
-          <p className="text-sm font-semibold text-slate-900 mb-4">
-            Revenue trend, last 7 days
+    <DashboardLayout>
+      <div className="space-y-6">
+        {/* Greetings Section with Perfect Dark Mode Text */}
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white transition-colors duration-200">
+            Welcome back, {firstName}
+          </h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 transition-colors duration-200">
+            Here's how your business is doing today.
           </p>
-          <RevenueChart data={salesTrend} />
-        </Card>
-        <AIInsightCard />
-      </div>
+        </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <LowStockWidget items={lowStock} />
-        <TopCustomersWidget customers={topCustomers} />
-        <RecentOrdersWidget orders={recentOrders} />
+        {/* Top Stat Cards Section */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+          <StatCard
+            label="Today's revenue"
+            value={formatCurrency(summary?.today?.revenue)}
+            icon={IndianRupee}
+            accent
+          />
+          <StatCard
+            label="Orders today"
+            value={summary?.today?.orders ?? 0}
+            icon={ShoppingCart}
+          />
+          <StatCard
+            label="Low stock items"
+            value={lowStock.length}
+            icon={AlertTriangle}
+          />
+          <StatCard
+            label="Avg order value"
+            value={formatCurrency(summary?.avgOrderValue)}
+            icon={TrendingUp}
+          />
+          <StatCard
+            label="Pending orders"
+            value={formatCurrency(
+              recentOrders?.filter((o) => o.discount === 0.99).reduce((sum, o) => sum + (o.finalAmount || 0), 0)
+            )}
+            icon={Hourglass}
+          />
+        </div>
+
+        {/* Middle Section: Charts & Insights */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+          <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-4 shadow-sm transition-colors duration-200">
+            <p className="text-sm font-semibold text-slate-900 dark:text-white mb-4">
+              Revenue trend, last 7 days
+            </p>
+            <RevenueChart data={salesTrend} />
+          </div>
+          <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-4 shadow-sm transition-colors duration-200">
+            <AIInsightCard />
+          </div>
+        </div>
+
+        {/* Lower Section: Widgets Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm transition-colors duration-200">
+            <LowStockWidget items={lowStock} />
+          </div>
+          <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm transition-colors duration-200">
+            <TopCustomersWidget customers={topCustomers} />
+          </div>
+          <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm transition-colors duration-200">
+            <RecentOrdersWidget orders={recentOrders} />
+          </div>
+        </div>
       </div>
     </DashboardLayout>
   );
