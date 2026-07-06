@@ -50,29 +50,47 @@ export default function AnalyticsPage() {
   }
 
   return (
-    <DashboardLayout title="Analytics" subtitle="Understand what's driving your business">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <StatCard label="This month" value={formatCurrency(summary?.month?.revenue)} icon={IndianRupee} accent />
-        <StatCard label="This week" value={formatCurrency(summary?.week?.revenue)} icon={TrendingUp} />
-        <StatCard label="Orders this month" value={summary?.month?.orders ?? 0} icon={ShoppingCart} />
-        <StatCard label="Avg order value" value={formatCurrency(summary?.avgOrderValue)} icon={Percent} />
-      </div>
+    <DashboardLayout>
+      {/* pt-4 lagane se Analytics heading Topbar se safe door niche shift ho jayegi */}
+      <div className="w-full space-y-6 pt-4">
+        
+        {/* Clean Visible Page Title Block */}
+        <div className="flex flex-col gap-1">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white transition-colors">
+            Analytics
+          </h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            Understand what's driving your business
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
-        <Card>
-          <p className="text-sm font-semibold text-slate-900 mb-4">Revenue trend, last 14 days</p>
-          <SalesTrendChart data={trend} />
-        </Card>
-        <Card>
-          <p className="text-sm font-semibold text-slate-900 mb-4">Revenue by category</p>
-          <CategorySalesChart data={categorySales} />
-        </Card>
-      </div>
+        {/* Stat Cards Grid Section */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <StatCard label="This month" value={formatCurrency(summary?.month?.revenue)} icon={IndianRupee} />
+          <StatCard label="This week" value={formatCurrency(summary?.week?.revenue)} icon={TrendingUp} />
+          <StatCard label="Orders this month" value={summary?.month?.orders ?? 0} icon={ShoppingCart} />
+          <StatCard label="Avg order value" value={formatCurrency(summary?.avgOrderValue)} icon={Percent} />
+        </div>
 
-      <Card>
-        <p className="text-sm font-semibold text-slate-900 mb-4">Top selling products</p>
-        <TopProductsChart data={topProducts} />
-      </Card>
+        {/* Charts Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+          <Card>
+            <p className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Revenue trend, last 14 days</p>
+            <SalesTrendChart data={trend} />
+          </Card>
+          
+          <Card>
+            <p className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Revenue by category</p>
+            <CategorySalesChart data={categorySales} />
+          </Card>
+        </div>
+
+        <Card>
+          <p className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Top selling products</p>
+          <TopProductsChart data={topProducts} />
+        </Card>
+
+      </div>
     </DashboardLayout>
   );
 }
