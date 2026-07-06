@@ -10,6 +10,7 @@ import InventoryPage from '../pages/InventoryPage';
 import CustomersPage from '../pages/CustomersPage';
 import OrdersPage from '../pages/OrdersPage';
 import InvoicesPage from '../pages/InvoicesPage';
+import orderFromPage from '../pages/OrderFormPage';
 import AnalyticsPage from '../pages/AnalyticsPage';
 import AIAssistantPage from '../pages/AIAssistantPage';
 import SettingsPage from '../pages/SettingsPage';
