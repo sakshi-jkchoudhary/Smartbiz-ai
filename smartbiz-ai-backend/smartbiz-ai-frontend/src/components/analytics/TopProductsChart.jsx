@@ -23,7 +23,7 @@ export default function TopProductsChart({ data }) {
     ],
   };
 
-  const options = {
+const options = {
     indexAxis: 'y',
     responsive: true,
     maintainAspectRatio: false,
@@ -36,14 +36,22 @@ export default function TopProductsChart({ data }) {
       },
     },
     scales: {
-      x: { grid: { color: '#f1f5f9' }, ticks: { color: '#94a3b8', font: { size: 11 } } },
-      y: { grid: { display: false }, ticks: { color: '#334155', font: { size: 12 } } },
-    },
-  };
-
-  return (
-    <div className="h-64">
-      <Bar data={chartData} options={options} />
-    </div>
-  );
-}
+      x: {
+        grid: { color: 'rgba(241, 245, 249, 0.08)' },
+        ticks: {
+          // Dynamic text color checks: checks if dark mode is active on document root
+          color: () => document.documentElement.classList.contains('dark') ? '#cbd5e1' : '#64748b',
+          font: { size: 11 }
+        }
+      },
+      y: {
+        grid: { display: false },
+        ticks: {
+          // FIXED: Amul Milk aur baki labels dark mode me dynamic white/light gray ho jayenge
+          color: () => document.documentElement.classList.contains('dark') ? '#f1f5f9' : '#334155',
+          font: { size: 12 }
+        }
+      }
+    }
+  }
+};
