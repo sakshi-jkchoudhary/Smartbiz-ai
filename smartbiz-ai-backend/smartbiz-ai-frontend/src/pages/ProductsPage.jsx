@@ -98,6 +98,29 @@ export default function ProductsPage() {
         </Card>
 
       </div>
+      <ProductFormModal
+  open={modalOpen}
+  onClose={() => {
+    setModalOpen(false);
+    setEditingProduct(null);
+  }}
+  product={editingProduct}
+  onSuccess={() => {
+    setModalOpen(false);
+    setEditingProduct(null);
+    loadProducts();
+  }}
+/>
+
+<ConfirmDialog
+  open={!!deleteTarget}
+  title="Delete Product"
+  description="Are you sure you want to delete this product?"
+  confirmText="Delete"
+  loading={deleting}
+  onConfirm={handleDeleteConfirm}
+  onClose={() => setDeleteTarget(null)}
+/>
     </DashboardLayout>
   );
 }
