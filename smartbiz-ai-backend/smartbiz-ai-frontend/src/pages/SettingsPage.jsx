@@ -69,8 +69,8 @@ export default function SettingsPage() {
     <DashboardLayout>
       <div className="flex-1 w-full max-w-4xl mx-auto px-6 py-8 space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Business Profile</h1>
-          <p className="text-sm text-slate-500 mt-1">Your business details, invoice settings, team, and backups.</p>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Business Profile</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Your business details, invoice settings, team, and backups.</p>
         </div>
 
         {/* Tabs */}

@@ -33,7 +33,7 @@ export default function Topbar({ title, subtitle, onMenuClick }) {
   ];
 
   return (
-    <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-sm border-b border-slate-100 px-4 md:px-8 py-4 flex items-center justify-between">
+    <header className="sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-slate-100 dark:border-slate-800 px-4 md:px-8 py-4 flex items-center justify-between transition-colors duration-200">
       <div className="flex items-center gap-3">
         <button
           onClick={onMenuClick}
