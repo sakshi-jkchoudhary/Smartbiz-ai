@@ -67,14 +67,39 @@ export default function ProductFormModal({ isOpen, onClose, onSuccess, product }
       reader.readAsDataURL(file);
     }
   };
-
-  const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
-    stopCamera();
-    onSuccess();
-    onClose();
-  };
+    try {
+      const payload = {
+        name: formData.name,
+        category: formData.category,
+        sku: formData.sku || undefined,
+        barcode: formData.barcode || undefined,
+        price: Number(formData.price),
+        costPrice: formData.costPrice ? Number(formData.costPrice) : undefined,
+        stockQty: Number(formData.stockQty),
+        unit: formData.unit,
+        reorderThreshold: Number(formData.reorderThreshold),
+        image: imagePreview || undefined
+      };
 
+      if (product) {
+        // Update product api check
+        await inventoryApi.update(product._id || product.id, payload);
+      } else {
+        // Create product api check
+        await inventoryApi.create(payload);
+      }
+
+      stopCamera();
+      onSuccess();
+      onClose();
+    } catch (err) {
+      console.error("API Error during product save:", err);
+      alert("Failed to save product in database. Please try again.");
+    }
+  };
+ 
   if (!isOpen) return null;
 
   return (

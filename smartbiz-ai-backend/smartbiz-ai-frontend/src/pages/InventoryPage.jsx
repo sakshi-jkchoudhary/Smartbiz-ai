@@ -6,7 +6,7 @@ import Loader from '../components/common/Loader';
 import EmptyState from '../components/common/EmptyState';
 // FIXED: Sahi folders path components lookup sequence
 import Badge from '../components/common/Badge';
-import { inventoryApi } from '../api/inventoryApi';
+import { inventoryApi } from '../../../api/inventoryApi';
 import { formatCurrency } from '../utils/formatCurrency';
 
 export default function InventoryPage() {
