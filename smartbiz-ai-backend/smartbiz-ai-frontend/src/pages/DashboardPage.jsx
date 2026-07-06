@@ -70,7 +70,7 @@ export default function DashboardPage() {
       <div className="space-y-6">
         {/* Greetings Section with Perfect Dark Mode Text */}
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white transition-colors duration-200">
+            <h2 className="text-2xl fixed font-bold text-slate-900 dark:text-white transition-colors duration-200">
             Welcome back, {firstName}
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 transition-colors duration-200">
