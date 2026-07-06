@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import toast from 'react-hot-toast';
-import { FileText } from 'lucide-react';
+import { FileText , Plus } from 'lucide-react';
 import DashboardLayout from '../components/layout/DashboardLayout';
 import Card from '../components/common/Card';
 import Loader from '../components/common/Loader';
@@ -38,17 +38,28 @@ export default function InvoicesPage() {
 
   return (
     <DashboardLayout>
-      {/* pt-4 adding safe spacing just like analytics layout page config */}
+      {/* pt-4 adding safe spacing just like analytics page layout */}
       <div className="w-full space-y-6 pt-4">
         
-        {/* Dynamic Visible Page Title Block */}
-        <div className="flex flex-col gap-1">
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white transition-colors">
-            Invoices
-          </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            Generate and manage customer invoices
-          </p>
+        {/* Dynamic Page Header Layout with 'Create Invoice' Button */}
+        <div className="flex justify-between items-center mb-2">
+          <div className="flex flex-col gap-1">
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white transition-colors">
+              Invoices
+            </h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              Generate and manage customer invoices
+            </p>
+          </div>
+          
+          {/* Create Invoice Action Button */}
+          <button
+            onClick={() => window.location.href = '/invoices/create'} // Tumhara path agar alag h toh change kr lena
+            className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-brand-500 dark:hover:bg-brand-600 text-white font-medium px-4 py-2.5 rounded-2xl shadow-sm transition-all text-sm active:scale-95"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Create Invoice</span>
+          </button>
         </div>
 
         {loading ? (
@@ -60,7 +71,6 @@ export default function InvoicesPage() {
             description="Your completed store orders and dynamic customer bills will instantly sync here."
           />
         ) : (
-          /* Main Split Interface Grid Layout Box */
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
             
             {/* Left Column: Live Invoices Interactive Selector List */}
