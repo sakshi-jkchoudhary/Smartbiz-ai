@@ -26,7 +26,7 @@ export default function ProductFormModal({ isOpen, onClose, onSuccess, product }
   // Barcode Scanner Scam/Simulation Feature
   const handleBarcodeScanSimulate = () => {
     const randomBarcode = '890' + Math.floor(1000000000 + Math.random() * 9000000000);
-    setFormData((prev) => ({ ...prev, [barcode]: randomBarcode }));
+    setFormData((prev) => ({ ...prev, barcode: randomBarcode }));
   };
 
   // Image Upload Handler
