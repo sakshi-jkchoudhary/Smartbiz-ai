@@ -12,22 +12,18 @@ import { formatCurrency } from '../../utils/formatCurrency';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip);
 
 export default function TopProductsChart({ data }) {
-  // 1. Dynamic check for instant real-time mode rendering values
-  const isDarkMode = document.documentElement.classList.contains('dark');
-
   const chartData = {
     labels: data?.map((d) => d.name) || [],
     datasets: [
       {
         data: data?.map((d) => d.revenue) || [],
-        backgroundColor: isDarkMode ? '#6366f1' : '#4f46e5', // Sleek dynamic indigo shades
+        backgroundColor: () => document.documentElement.classList.contains('dark') ? '#6366f1' : '#4f46e5',
         borderRadius: 6,
         maxBarThickness: 32,
       },
     ],
   };
 
-  // 2. Options directly configured context aware to sync perfectly with toggles
   const options = {
     indexAxis: 'y',
     responsive: true,
@@ -35,7 +31,7 @@ export default function TopProductsChart({ data }) {
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: isDarkMode ? '#0f172a' : '#1e293b',
+        backgroundColor: () => document.documentElement.classList.contains('dark') ? '#0f172a' : '#1e293b',
         titleColor: '#ffffff',
         bodyColor: '#ffffff',
         cornerRadius: 8,
@@ -46,28 +42,35 @@ export default function TopProductsChart({ data }) {
     scales: {
       x: {
         grid: { 
-          color: isDarkMode ? 'rgba(241, 245, 249, 0.08)' : 'rgba(15, 23, 42, 0.06)' 
+          color: () => document.documentElement.classList.contains('dark') ? 'rgba(241, 245, 249, 0.08)' : 'rgba(15, 23, 42, 0.06)' 
         },
         ticks: {
-          color: isDarkMode ? '#94a3b8' : '#64748b', // slate-400 vs slate-500
+          color: () => document.documentElement.classList.contains('dark') ? '#94a3b8' : '#64748b',
           font: { size: 11 }
         }
       },
       y: {
         grid: { display: false },
         ticks: {
-          // FIXED: Pure runtime sync parameters for absolute contrast resolution
-          color: isDarkMode ? '#f8fafc' : '#1e293b', // slate-50 vs slate-900
+          // ABSOLUTE DYNAMIC EXECUTION FOR DARK/LIGHT PARITY
+          color: () => document.documentElement.classList.contains('dark') ? '#f8fafc' : '#1e293b',
           font: { size: 12, weight: '500' }
         }
       }
     }
   };
 
+  // Check current theme value for dynamic conditional wrapper rendering
+  const isDarkActive = typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
+
   return (
     <div className="w-full min-h-[320px] relative pt-2">
-      {/* key component property forces ChartJS canvas to cleanly redraw whenever user switches theme layout */}
-      <Bar key={isDarkMode ? 'dark-canvas' : 'light-canvas'} data={chartData} options={options} />
+      {/* Forcing canvas refresh on toggle updates using timestamp or state keys */}
+      <Bar 
+        key={isDarkActive ? 'canvas-dark-theme' : 'canvas-light-theme'} 
+        data={chartData} 
+        options={options} 
+      />
     </div>
   );
 }
