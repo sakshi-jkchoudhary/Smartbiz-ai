@@ -1,3 +1,4 @@
+import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -23,7 +24,7 @@ export default function TopProductsChart({ data }) {
     ],
   };
 
-const options = {
+  const options = {
     indexAxis: 'y',
     responsive: true,
     maintainAspectRatio: false,
@@ -39,7 +40,6 @@ const options = {
       x: {
         grid: { color: 'rgba(241, 245, 249, 0.08)' },
         ticks: {
-          // Dynamic text color checks: checks if dark mode is active on document root
           color: () => document.documentElement.classList.contains('dark') ? '#cbd5e1' : '#64748b',
           font: { size: 11 }
         }
@@ -47,11 +47,17 @@ const options = {
       y: {
         grid: { display: false },
         ticks: {
-          // FIXED: Amul Milk aur baki labels dark mode me dynamic white/light gray ho jayenge
           color: () => document.documentElement.classList.contains('dark') ? '#f1f5f9' : '#334155',
           font: { size: 12 }
         }
       }
     }
-  }
-};
+  };
+
+  // FIXED: Yeh return statement layout ko puri space dega aur crash theek karega
+  return (
+    <div className="w-full min-h-[320px] relative pt-2">
+      <Bar data={chartData} options={options} />
+    </div>
+  );
+}
