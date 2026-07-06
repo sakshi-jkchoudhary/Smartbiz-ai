@@ -66,17 +66,22 @@ export default function DashboardPage() {
   }
 
   return (
-    <DashboardLayout>
-      <div className="space-y-6">
-        {/* Greetings Section with Perfect Dark Mode Text */}
-        <div className="mb-6">
-            <h2 className="text-2xl fixed font-bold text-slate-900 dark:text-white transition-colors duration-200">
-            Welcome back, {firstName}
-          </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 transition-colors duration-200">
-            Here's how your business is doing today.
-          </p>
-        </div>
+  <DashboardLayout>
+    {/* block text wrapper ensures proper block flow structure */}
+    <div className="flex flex-col w-full space-y-6">
+
+      {/* Spacing isolated greetings wrapper */}
+      <div className="w-full pb-2 border-b border-transparent">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white block">
+          Welcome back, {firstName}
+        </h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 block">
+          Here's how your business is doing today.
+        </p>
+      </div>
+
+      {/* Iske niche aapka normal StatCards grid shuru hoga */}
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4"></div>
 
         {/* Top Stat Cards Section */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
