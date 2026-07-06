@@ -10,10 +10,12 @@ import InvoicePreview from '../components/invoices/InvoicePreview';
 import InvoicePDFButton from '../components/invoices/InvoicePDFButton';
 import { invoiceApi } from '../api/invoiceApi';
 import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 export default function InvoicesPage() {
   const { business } = useAuth();
   const [invoices, setInvoices] = useState([]);
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState(null);
 
@@ -54,7 +56,7 @@ export default function InvoicesPage() {
           
           {/* Create Invoice Action Button */}
           <button
-            onClick={() => window.location.href = '/invoices/create'} // Tumhara path agar alag h toh change kr lena
+            onClick={() => navigate('/orders')} // Tumhara path agar alag h toh change kr lena
             className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-brand-500 dark:hover:bg-brand-600 text-white font-medium px-4 py-2.5 rounded-2xl shadow-sm transition-all text-sm active:scale-95"
           >
             <Plus className="w-4 h-4" />

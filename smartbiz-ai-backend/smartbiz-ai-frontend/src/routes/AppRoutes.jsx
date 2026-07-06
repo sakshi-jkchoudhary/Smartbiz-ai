@@ -10,6 +10,7 @@ import InventoryPage from '../pages/InventoryPage';
 import CustomersPage from '../pages/CustomersPage';
 import OrdersPage from '../pages/OrdersPage';
 import InvoicesPage from '../pages/InvoicesPage';
+import InvoiceCreatePage from '../pages/InvoiceCreatePage';
 import AnalyticsPage from '../pages/AnalyticsPage';
 import AIAssistantPage from '../pages/AIAssistantPage';
 import SettingsPage from '../pages/SettingsPage';
@@ -22,7 +23,7 @@ export default function AppRoutes() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
-      
+
       <Route
         path="/dashboard"
         element={
@@ -65,6 +66,14 @@ export default function AppRoutes() {
       />
       <Route
         path="/invoices"
+        element={
+          <ProtectedRoute>
+            <InvoicesPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/invoices/create"
         element={
           <ProtectedRoute>
             <InvoicesPage />
