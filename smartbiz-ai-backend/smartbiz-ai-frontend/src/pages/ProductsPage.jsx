@@ -64,12 +64,12 @@ export default function ProductsPage() {
 
   return (
     <DashboardLayout title="Products" subtitle="Manage your product catalog and pricing">
-      {/* Sahi spacing wrapper jo content ko sidebar se alag rakhega */}
-      <div className="w-full max-w-6xl mx-auto space-y-6">
+      <div className="w-full space-y-6">
         
         <Card>
-          <div className="flex items-center justify-between mb-5 gap-3">
-            <div className="relative w-72">
+          {/* Responsive container ensures search input and Add Product button sit side by side */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-5 gap-4">
+            <div className="relative w-full sm:w-72">
               <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
@@ -79,7 +79,9 @@ export default function ProductsPage() {
                 className="input-field pl-9"
               />
             </div>
-            <Button icon={Plus} onClick={handleAdd}>
+            
+            {/* The missing action button */}
+            <Button icon={Plus} onClick={handleAdd} className="w-full sm:w-auto shrink-0">
               Add product
             </Button>
           </div>
