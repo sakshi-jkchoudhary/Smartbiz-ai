@@ -99,7 +99,7 @@ export default function ProductsPage() {
 
       </div>
       <ProductFormModal
-  open={modalOpen}
+  isOpen={modalOpen}
   onClose={() => {
     setModalOpen(false);
     setEditingProduct(null);
