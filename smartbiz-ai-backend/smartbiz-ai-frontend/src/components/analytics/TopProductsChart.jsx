@@ -12,18 +12,22 @@ import { formatCurrency } from '../../utils/formatCurrency';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip);
 
 export default function TopProductsChart({ data }) {
+  // 1. Dynamic check for instant real-time mode rendering values
+  const isDarkMode = document.documentElement.classList.contains('dark');
+
   const chartData = {
     labels: data?.map((d) => d.name) || [],
     datasets: [
       {
         data: data?.map((d) => d.revenue) || [],
-        backgroundColor: '#4f46e5',
+        backgroundColor: isDarkMode ? '#6366f1' : '#4f46e5', // Sleek dynamic indigo shades
         borderRadius: 6,
         maxBarThickness: 32,
       },
     ],
   };
 
+  // 2. Options directly configured context aware to sync perfectly with toggles
   const options = {
     indexAxis: 'y',
     responsive: true,
@@ -31,33 +35,39 @@ export default function TopProductsChart({ data }) {
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: '#0f172a',
+        backgroundColor: isDarkMode ? '#0f172a' : '#1e293b',
+        titleColor: '#ffffff',
+        bodyColor: '#ffffff',
         cornerRadius: 8,
+        padding: 10,
         callbacks: { label: (ctx) => formatCurrency(ctx.raw) },
       },
     },
     scales: {
       x: {
-        grid: { color: 'rgba(241, 245, 249, 0.08)' },
+        grid: { 
+          color: isDarkMode ? 'rgba(241, 245, 249, 0.08)' : 'rgba(15, 23, 42, 0.06)' 
+        },
         ticks: {
-          color: () => document.documentElement.classList.contains('dark') ? '#cbd5e1' : '#64748b',
+          color: isDarkMode ? '#94a3b8' : '#64748b', // slate-400 vs slate-500
           font: { size: 11 }
         }
       },
       y: {
         grid: { display: false },
         ticks: {
-          color: () => document.documentElement.classList.contains('dark') ? '#f1f5f9' : '#334155',
-          font: { size: 12 }
+          // FIXED: Pure runtime sync parameters for absolute contrast resolution
+          color: isDarkMode ? '#f8fafc' : '#1e293b', // slate-50 vs slate-900
+          font: { size: 12, weight: '500' }
         }
       }
     }
   };
 
-  // FIXED: Yeh return statement layout ko puri space dega aur crash theek karega
   return (
     <div className="w-full min-h-[320px] relative pt-2">
-      <Bar data={chartData} options={options} />
+      {/* key component property forces ChartJS canvas to cleanly redraw whenever user switches theme layout */}
+      <Bar key={isDarkMode ? 'dark-canvas' : 'light-canvas'} data={chartData} options={options} />
     </div>
   );
 }
